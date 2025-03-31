@@ -1,0 +1,20 @@
+.card {
+    background: #86b986;
+    display: inline-block;
+    border-radius: 30px;
+    width: 321px;
+    height: 300px;
+    margin: 10px;
+    padding: 10px 30px 10px;
+    border: 2px solid #000;
+    font-size: 24px;
+    box-shadow: inset 0px 0px 7px 0px;
+}
+
+.block {
+    background: rgb(229, 249, 254);
+    border-radius: 15px 0 0 15px;
+    border: 1px solid #000;
+    height: 820px;
+    overflow: auto;
+}

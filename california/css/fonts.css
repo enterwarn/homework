@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'Inter 24pt';
+    src: local('Inter 24pt Regular'), local('Inter24pt-Regular'),
+        url('../fonts/Inter24pt-Regular.woff2') format('woff2'),
+        url('../fonts/Inter24pt-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Readex Pro';
+    src: local('Readex Pro Regular'), local('ReadexPro-Regular'),
+        url('../fonts/ReadexPro-Regular.woff2') format('woff2'),
+        url('../fonts/ReadexPro-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter 18pt';
+    src: local('Inter 18pt Regular'), local('Inter18pt-Regular'),
+        url('../fonts/Inter18pt-Regular.woff2') format('woff2'),
+        url('../fonts/Inter18pt-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

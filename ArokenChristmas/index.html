@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Письмо Деду Морозу</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Georgia', serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0c1e3e 0%, #163a5f 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: titleGlow 3s infinite alternate;
+        }
+        
+        @keyframes titleGlow {
+            0% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
+            100% { text-shadow: 0 0 20px #ffd700, 0 0 30px #ffd700, 0 0 40px #ffd700; }
+        }
+        
+        .header h1 {
+            color: #ffd700;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+        
+        .header h2 {
+            color: #fff;
+            font-size: 1.8rem;
+            font-weight: normal;
+            opacity: 0.9;
+        }
+        
+        .envelope-decoration {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 120px;
+            height: 80px;
+            background: linear-gradient(45deg, #b22222, #ff4444);
+            border-radius: 5px;
+            transform: rotate(5deg);
+            z-index: 1;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: envelopeFloat 4s ease-in-out infinite;
+        }
+        
+        .envelope-decoration:before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 20px solid #b22222;
+        }
+        
+        .envelope-decoration:after {
+            content: '✉';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            color: #ffd700;
+        }
+        
+        @keyframes envelopeFloat {
+            0%, 100% { transform: rotate(5deg) translateY(0); }
+            50% { transform: rotate(5deg) translateY(-15px); }
+        }
+        
+        .letter {
+            background: linear-gradient(to bottom, #fffaf0, #fff5e6);
+            border-radius: 15px;
+            padding: 50px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+            border: 3px solid #ffcc80;
+            overflow: hidden;
+            animation: letterAppear 2s ease-out;
+        }
+        
+        @keyframes letterAppear {
+            0% { opacity: 0; transform: scale(0.9) translateY(50px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        
+        .letter:before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 2px dashed rgba(255, 69, 0, 0.3);
+            border-radius: 10px;
+            pointer-events: none;
+        }
+        
+        .letter-content {
+            line-height: 1.9;
+            font-size: 1.25rem;
+            color: #333;
+            text-align: justify;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .letter-content p {
+            margin-bottom: 25px;
+            padding-left: 30px;
+            position: relative;
+            animation: paragraphReveal 1s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .letter-content p:nth-child(1) { animation-delay: 0.5s; }
+        .letter-content p:nth-child(2) { animation-delay: 1s; }
+        .letter-content p:nth-child(3) { animation-delay: 1.5s; }
+        
+        @keyframes paragraphReveal {
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        .letter-content p:before {
+            content: '❄';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #d32f2f;
+            font-size: 1.5rem;
+            animation: snowflakeSpin 3s infinite linear;
+        }
+        
+        @keyframes snowflakeSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .letter-signature {
+            margin-top: 50px;
+            text-align: right;
+            font-style: italic;
+            font-size: 1.8rem;
+            color: #b71c1c;
+            padding-top: 25px;
+            border-top: 3px double #ff9800;
+            opacity: 0;
+            animation: signatureReveal 1.5s ease-out 2s forwards;
+        }
+        
+        @keyframes signatureReveal {
+            100% { opacity: 1; }
+        }
+        
+        .highlight {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .highlight:after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+            opacity: 0;
+            animation: highlightPulse 4s infinite;
+        }
+        
+        @keyframes highlightPulse {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.8; }
+        }
+        
+        .snowflakes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: #fff;
+            font-size: 20px;
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+        
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(360deg); }
+        }
+        
+        .decoration {
+            position: fixed;
+            font-size: 40px;
+            color: #ffd700;
+            z-index: 1;
+            opacity: 0.7;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .decoration:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+        .decoration:nth-child(2) { top: 15%; right: 8%; animation-delay: 1s; }
+        .decoration:nth-child(3) { bottom: 20%; left: 10%; animation-delay: 2s; }
+        .decoration:nth-child(4) { bottom: 15%; right: 5%; animation-delay: 3s; }
+        .decoration:nth-child(5) { top: 50%; left: 3%; animation-delay: 4s; }
+        .decoration:nth-child(6) { top: 60%; right: 3%; animation-delay: 5s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(20deg); }
+        }
+        
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 30%, rgba(255, 69, 0, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 50% 80%, rgba(30, 144, 255, 0.05) 0%, transparent 20%);
+            z-index: 0;
+        }
+        
+        @keyframes bgTwinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+        
+        .bg-pattern:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffd700' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.5;
+            animation: bgTwinkle 8s infinite alternate;
+        }
+        
+        .letter-glow {
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ffd700, #ff8c00, #ff4444, #ffd700);
+            border-radius: 17px;
+            z-index: -1;
+            filter: blur(10px);
+            opacity: 0.5;
+            animation: glowRotate 10s linear infinite;
+        }
+        
+        @keyframes glowRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.5rem; }
+            .header h2 { font-size: 1.4rem; }
+            .letter-content { font-size: 1.1rem; }
+            .letter { padding: 30px; }
+            .letter-signature { font-size: 1.5rem; }
+            .envelope-decoration { width: 80px; height: 60px; top: 10px; right: 10px; }
+            .envelope-decoration:before { border-left: 40px solid transparent; border-right: 40px solid transparent; }
+            .envelope-decoration:after { font-size: 25px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    
+    <div class="decoration">🎁</div>
+    <div class="decoration">🌟</div>
+    <div class="decoration">🎄</div>
+    <div class="decoration">⛄</div>
+    <div class="decoration">🔔</div>
+    <div class="decoration">🦌</div>
+    
+    <div class="envelope-decoration"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>Письмо Деду Морозу</h1>
+            <h2>С наилучшими новогодними пожеланиями</h2>
+        </div>
+        
+        <div class="letter">
+            <div class="letter-glow"></div>
+            
+            <div class="letter-content">
+                <p><span class="highlight">Дедушка Мороз, здравствуй!</span> Пишу это письмо спокойно и сердечно: год был непростой, но в нём было много светлых минут — я учился, старался поддерживать людей рядом и ценил простые радости. Иногда ошибался, но каждый раз пытался исправиться и стать чуть лучше.</p>
+                
+                <p>Я не прошу много материального — <span class="highlight">мне важнее здоровье и спокойствие для семьи</span>, чтобы мои близкие не волновались, а друзья находили силы и вдохновение. Хотелось бы, чтобы у тех, кто сейчас в трудной ситуации, появилось хотя бы маленькое чудо и повод улыбнуться.</p>
+                
+                <p><span class="highlight">Пожалуйста, подари мне уверенность в себе и больше поводов делиться добротой</span> — я обещаю помогать и сохранять тепло в отношениях. Спасибо за веру в волшебство, которое делает даже обычные дни чуть ярче.</p>
+            </div>
+            
+            <div class="letter-signature">
+                С теплом и надеждой,<br>
+                Твой верный друг.
+            </div>
+        </div>
+    </div>
+    
+    <div class="snowflakes" id="snowflakes"></div>
+    
+    <script>
+        function createSnowflakes() {
+            const snowflakesContainer = document.getElementById('snowflakes');
+            const snowflakeSymbols = ['❄', '❅', '❆', '•', '✦', '✧'];
+            
+            for (let i = 0; i < 80; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                snowflake.innerHTML = snowflakeSymbols[Math.floor(Math.random() * snowflakeSymbols.length)];
+                
+                const size = Math.random() * 25 + 10;
+                const left = Math.random() * 100;
+                const duration = Math.random() * 15 + 10;
+                const delay = Math.random() * 15;
+                const opacity = Math.random() * 0.7 + 0.3;
+                
+                snowflake.style.left = `${left}%`;
+                snowflake.style.fontSize = `${size}px`;
+                snowflake.style.animationDuration = `${duration}s`;
+                snowflake.style.animationDelay = `${delay}s`;
+                snowflake.style.opacity = `${opacity}`;
+                
+                snowflakesContainer.appendChild(snowflake);
+            }
+        }
+        
+        function initHighlightEffects() {
+            const highlights = document.querySelectorAll('.highlight');
+            
+            highlights.forEach((highlight, index) => {
+                highlight.style.setProperty('--delay', `${index * 0.5}s`);
+                
+                highlight.addEventListener('mouseenter', function() {
+                    this.style.textShadow = '0 0 10px #ffd700, 0 0 20px #ffd700';
+                    this.style.transition = 'text-shadow 0.3s';
+                });
+                
+                highlight.addEventListener('mouseleave', function() {
+                    this.style.textShadow = '';
+                });
+            });
+        }
+        
+        function createTwinkles() {
+            const bgPattern = document.querySelector('.bg-pattern');
+            
+            for (let i = 0; i < 30; i++) {
+                const twinkle = document.createElement('div');
+                twinkle.style.position = 'absolute';
+                twinkle.style.width = `${Math.random() * 5 + 2}px`;
+                twinkle.style.height = twinkle.style.width;
+                twinkle.style.backgroundColor = '#ffd700';
+                twinkle.style.borderRadius = '50%';
+                twinkle.style.left = `${Math.random() * 100}%`;
+                twinkle.style.top = `${Math.random() * 100}%`;
+                twinkle.style.opacity = '0';
+                twinkle.style.boxShadow = '0 0 10px #ffd700';
+                twinkle.style.animation = `twinkle ${Math.random() * 5 + 3}s infinite ${Math.random() * 5}s`;
+                
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes twinkle {
+                        0%, 100% { opacity: 0; }
+                        50% { opacity: ${Math.random() * 0.7 + 0.3}; }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                bgPattern.appendChild(twinkle);
+            }
+        }
+        
+        window.addEventListener('load', function() {
+            createSnowflakes();
+            initHighlightEffects();
+            createTwinkles();
+            
+            document.addEventListener('mousemove', function(e) {
+                const x = (e.clientX / window.innerWidth - 0.5) * 20;
+                const y = (e.clientY / window.innerHeight - 0.5) * 20;
+                
+                document.querySelector('.letter').style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
